@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Standalone claude-gateway setup on a Debian/Ubuntu server with systemd; safe to re-run.
-# Works from any copy of the gateway directory, independent of the war-predictor app:
-#   git clone --filter=blob:none --sparse https://github.com/FixerHack/war-predictor.git ~/claude-gateway
-#   cd ~/claude-gateway && git sparse-checkout set gateway && cd gateway && ./scripts/install.sh
+# Works from any copy of this repository, independent of the programs that use the gateway:
+#   git clone https://github.com/FixerHack/claude-gateway.git ~/claude-gateway
+#   cd ~/claude-gateway && ./scripts/install.sh
 # Needs sudo for the systemd unit. Installs uv and Claude Code if missing.
 set -euo pipefail
 

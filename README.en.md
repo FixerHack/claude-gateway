@@ -16,12 +16,11 @@ Every request is a separate `claude -p` call:
 
 So Claude Code acts only as a model. Answers can be JSON matching a schema (`json_schema`).
 
-`tension-index` can use it too: `CLASSIFIER_PROVIDER=gateway`, `GATEWAY_URL`, `GATEWAY_TOKEN`.
+[war-predictor](https://github.com/FixerHack/war-predictor) (`tension-index`), for example, uses it: `CLASSIFIER_PROVIDER=gateway`, `GATEWAY_URL`, `GATEWAY_TOKEN`.
 
 ## Running
 
 ```bash
-cd gateway
 uv sync
 cp .env.example .env      # fill in GATEWAY_TOKENS
 set -a; . ./.env; set +a
@@ -36,10 +35,12 @@ Claude Code must be installed and signed in (`claude auth status`). On a server 
 systemd service: [`deploy/claude-gateway.service`](deploy/claude-gateway.service); on the server [`scripts/install.sh`](scripts/install.sh) installs it — separately from any client programs, in its own directory:
 
 ```bash
-git clone --filter=blob:none --sparse https://github.com/FixerHack/war-predictor.git ~/claude-gateway
-cd ~/claude-gateway && git sparse-checkout set gateway && cd gateway
+git clone https://github.com/FixerHack/claude-gateway.git ~/claude-gateway
+cd ~/claude-gateway
 ./scripts/install.sh   # uv, Claude Code, .env with a token, systemd service
 ```
+
+Update: `cd ~/claude-gateway && git pull --ff-only && ./scripts/install.sh` (the script is safe to re-run; `.env` and tokens are kept).
 
 ## Requests
 

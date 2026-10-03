@@ -16,12 +16,11 @@
 
 Тобто Claude Code працює лише як модель. Відповідь можна отримати у форматі JSON за схемою (`json_schema`).
 
-Зі шлюзом працює й `tension-index`: `CLASSIFIER_PROVIDER=gateway`, `GATEWAY_URL`, `GATEWAY_TOKEN`.
+Зі шлюзом працює, наприклад, [war-predictor](https://github.com/FixerHack/war-predictor) (`tension-index`): `CLASSIFIER_PROVIDER=gateway`, `GATEWAY_URL`, `GATEWAY_TOKEN`.
 
 ## Запуск
 
 ```bash
-cd gateway
 uv sync
 cp .env.example .env      # заповніть GATEWAY_TOKENS
 set -a; . ./.env; set +a
@@ -36,10 +35,12 @@ uv run claude-gateway serve            # http://127.0.0.1:8787
 Сервіс systemd: [`deploy/claude-gateway.service`](deploy/claude-gateway.service); на сервері його ставить [`scripts/install.sh`](scripts/install.sh) — окремо від будь-яких програм-клієнтів, у власній теці:
 
 ```bash
-git clone --filter=blob:none --sparse https://github.com/FixerHack/war-predictor.git ~/claude-gateway
-cd ~/claude-gateway && git sparse-checkout set gateway && cd gateway
+git clone https://github.com/FixerHack/claude-gateway.git ~/claude-gateway
+cd ~/claude-gateway
 ./scripts/install.sh   # uv, Claude Code, .env з токеном, сервіс systemd
 ```
+
+Оновлення: `cd ~/claude-gateway && git pull --ff-only && ./scripts/install.sh` (скрипт безпечно запускати повторно, `.env` і токени лишаються).
 
 ## Запити
 
