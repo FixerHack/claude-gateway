@@ -1,6 +1,6 @@
 [project]
 name = "claude-gateway"
-version = "0.1.1"
+version = "0.1.2"
 description = "HTTP API (own, OpenAI- and Anthropic-compatible) and MCP server on top of the local Claude Code CLI"
 readme = "README.md"
 requires-python = ">=3.12"
